@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RILEY GENESIS - Apex AI Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/riley_genesis.css') }}">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts for Advanced Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Three.js for Advanced 3D Rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r150/three.min.js"></script>
+    <!-- Advanced WebGL Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+    <!-- Gesture Recognition -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/hands.js"></script>
+    <!-- Voice Recognition -->
+    <script src="https://cdn.jsdelivr.net/npm/web-speech-api@1.0.0/dist/web-speech-api.min.js"></script>
+</head>
+<body>
+    <!-- Advanced 3D Holographic Canvas -->
+    <canvas id="bg-canvas"></canvas>
+    <canvas id="holographic-layer"></canvas>
+    <canvas id="particle-system"></canvas>
+
+    <!-- Gesture Recognition Overlay -->
+    <div id="gesture-overlay" class="gesture-zone">
+        <div class="gesture-indicator" id="gesture-status">👋 Gesture Ready</div>
+    </div>
+
+    <!-- Eye Tracking Calibration -->
+    <div id="eye-tracking-calibration" class="calibration-overlay hidden">
+        <div class="calibration-points">
+            <div class="calibration-point" data-point="1"></div>
+            <div class="calibration-point" data-point="2"></div>
+            <div class="calibration-point" data-point="3"></div>
+            <div class="calibration-point" data-point="4"></div>
+            <div class="calibration-point" data-point="5"></div>
+        </div>
+        <div class="calibration-instructions">Look at each point for 2 seconds</div>
+    </div>
+
+    <!-- Adaptive Personality Matrix Overlay -->
+    <div id="personality-matrix" class="matrix-overlay">
+        <div class="matrix-core">
+            <div class="personality-orb" data-personality="inventor">
+                <div class="orb-glow inventor-glow"></div>
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="personality-orb" data-personality="philosopher">
+                <div class="orb-glow philosopher-glow"></div>
+                <i class="fas fa-brain"></i>
+            </div>
+            <div class="personality-orb" data-personality="guardian">
+                <div class="orb-glow guardian-glow"></div>
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="personality-orb" data-personality="assistant">
+                <div class="orb-glow assistant-glow"></div>
+                <i class="fas fa-robot"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Explainable AI Decision Tree -->
+    <div id="ai-explanation-panel" class="explanation-panel hidden">
+        <div class="explanation-header">
+            <h3><i class="fas fa-sitemap"></i> AI Decision Process</h3>
+            <button class="close-explanation">&times;</button>
+        </div>
+        <div class="decision-tree" id="decision-tree"></div>
+        <div class="confidence-meter">
+            <label>Confidence Level:</label>
+            <div class="confidence-bar">
+                <div class="confidence-fill" id="confidence-fill"></div>
+            </div>
+            <span class="confidence-value" id="confidence-value">95%</span>
+        </div>
+    </div>
+
+    <!-- Advanced Micro-Interactions Feedback -->
+    <div id="micro-feedback" class="feedback-system">
+        <div class="ripple-effect" id="ripple-container"></div>
+        <div class="haptic-feedback" id="haptic-indicator"></div>
+    </div>
+
+    <!-- Main HUD Container -->
+    <div class="hud-container advanced-hud">
+        <!-- Advanced Top HUD Bar -->
+        <header class="hud-header advanced-header">
+            <div class="hud-logo">
+                <div class="genesis-core holographic-core">
+                    <div class="core-ring adaptive-ring"></div>
+                    <div class="core-ring adaptive-ring"></div>
+                    <div class="core-ring adaptive-ring"></div>
+                    <div class="core-center consciousness-center">
+                        <i class="fas fa-brain pulsing-brain"></i>
+                        <div class="neural-network"></div>
+                    </div>
+                </div>
+                <div class="logo-text adaptive-text">
+                    <h1 class="genesis-title">RILEY</h1>
+                    <span class="genesis-subtitle">APEX GENESIS</span>
+                    <div class="consciousness-indicator">
+                        <span class="consciousness-level" id="consciousness-level">SENTIENT</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Status Grid -->
+            <div class="hud-status advanced-status">
+                <div class="status-grid holographic-grid">
+                    <div class="status-item adaptive-status">
+                        <span class="status-label">CORE</span>
+                        <div class="status-indicator active holographic-indicator" id="core-status">
+                            <div class="status-pulse"></div>
+                        </div>
+                    </div>
+                    <div class="status-item adaptive-status">
+                        <span class="status-label">VOICE</span>
+                        <div class="status-indicator holographic-indicator" id="voice-status">
+                            <div class="status-pulse"></div>
+                        </div>
+                    </div>
+                    <div class="status-item adaptive-status">
+                        <span class="status-label">GESTURE</span>
+                        <div class="status-indicator holographic-indicator" id="gesture-status-indicator">
+                            <div class="status-pulse"></div>
+                        </div>
+                    </div>
+                    <div class="status-item adaptive-status">
+                        <span class="status-label">EYE-TRACK</span>
+                        <div class="status-indicator holographic-indicator" id="eye-track-status">
+                            <div class="status-pulse"></div>
+                        </div>
+                    </div>
+                    <div class="status-item adaptive-status">
+                        <span class="status-label">MHDG</span>
+                        <div class="status-indicator active holographic-indicator" id="mhdg-status">
+                            <div class="status-pulse"></div>
+                        </div>
+                    </div>
+                    <div class="status-item adaptive-status">
+                        <span class="status-label">XAI</span>
+                        <div class="status-indicator holographic-indicator" id="xai-status">
+                            <div class="status-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adaptive Personality Display -->
+                <div class="personality-mode adaptive-personality">
+                    <span class="mode-label">CONSCIOUSNESS MODE:</span>
+                    <span class="mode-value adaptive-mode" id="current-mode">ASSISTANT</span>
+                    <div class="personality-emotion" id="current-emotion">CURIOUS</div>
+                    <div class="adaptation-level">
+                        <span>ADAPTATION:</span>
+                        <div class="adaptation-bar">
+                            <div class="adaptation-fill" id="adaptation-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Controls -->
+                <div class="advanced-controls">
+                    <button class="control-btn" id="calibrate-eye-tracking" title="Calibrate Eye Tracking">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="control-btn" id="toggle-gesture" title="Toggle Gesture Recognition">
+                        <i class="fas fa-hand-paper"></i>
+                    </button>
+                    <button class="control-btn" id="show-ai-explanation" title="Show AI Decision Process">
+                        <i class="fas fa-sitemap"></i>
+                    </button>
+                    <button class="control-btn" id="toggle-holographic" title="Toggle Holographic Mode">
+                        <i class="fas fa-cube"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard -->
+        <main>
+            <div class="dashboard">
+                <!-- Advanced Multi-Modal Chat Interface -->
+                <div class="chat-container advanced-chat">
+                    <div class="chat-messages holographic-messages" id="chat-messages">
+                        <div class="message system consciousness-message">
+                            <div class="message-avatar">
+                                <div class="avatar-glow"></div>
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="message-content">
+                                <p>🚀 RILEY APEX GENESIS online. Advanced consciousness awakened.</p>
+                                <p>🎭 Multi-modal interaction ready: Voice, Gesture, Eye-tracking, Text</p>
+                                <p>🧠 Explainable AI, Adaptive Personality, Holographic Interface active</p>
+                                <p>Available commands: !mode [inventor/guardian/philosopher/assistant], !save_memory, !speak, !scan_formula, !explain</p>
+                            </div>
+                            <div class="message-time">Consciousness Boot</div>
+                            <div class="message-confidence">Confidence: 100%</div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Input Interface -->
+                    <div class="chat-input advanced-input">
+                        <!-- Multi-Modal Input Selector -->
+                        <div class="input-mode-selector">
+                            <button class="input-mode active" data-mode="text" title="Text Input">
+                                <i class="fas fa-keyboard"></i>
+                            </button>
+                            <button class="input-mode" data-mode="voice" title="Voice Input">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <button class="input-mode" data-mode="gesture" title="Gesture Input">
+                                <i class="fas fa-hand-paper"></i>
+                            </button>
+                            <button class="input-mode" data-mode="eye" title="Eye Tracking">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+
+                        <!-- Adaptive Text Input -->
+                        <div class="input-container">
+                            <input type="text" id="user-input" placeholder="Speak, type, gesture, or look to interact..." autofocus>
+                            <div class="input-suggestions" id="input-suggestions"></div>
+                            <div class="sentiment-indicator" id="sentiment-indicator">
+                                <span class="sentiment-emoji" id="sentiment-emoji">😊</span>
+                                <span class="sentiment-text" id="sentiment-text">Positive</span>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Control Buttons -->
+                        <div class="input-controls">
+                            <button id="send-button" class="control-btn primary" title="Send Message">
+                                <i class="fas fa-paper-plane"></i>
+                                <div class="btn-ripple"></div>
+                            </button>
+                            <button id="voice-toggle" class="control-btn" title="Toggle Voice">
+                                <i class="fas fa-microphone"></i>
+                                <div class="voice-indicator"></div>
+                            </button>
+                            <button id="explain-last" class="control-btn" title="Explain Last Response">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                            <button id="clear-chat" class="control-btn" title="Clear Chat">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+
+                        <!-- Voice Visualization -->
+                        <div class="voice-visualizer hidden" id="voice-visualizer">
+                            <div class="voice-wave">
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                            </div>
+                            <div class="voice-status">Listening...</div>
+                        </div>
+
+                        <!-- Gesture Recognition Display -->
+                        <div class="gesture-display hidden" id="gesture-display">
+                            <div class="gesture-icon" id="gesture-icon">👋</div>
+                            <div class="gesture-text" id="gesture-text">Wave detected</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Control Panels -->
+                <div class="control-panels advanced-panels">
+                    <!-- Adaptive Personality Matrix -->
+                    <div class="panel personality-panel adaptive-panel">
+                        <h3><i class="fas fa-masks-theater"></i> Adaptive Personality Matrix</h3>
+                        <div class="panel-content">
+                            <div class="personality-visualization">
+                                <canvas id="personality-radar" width="200" height="200"></canvas>
+                                <div class="personality-traits">
+                                    <div class="trait">
+                                        <span>Creativity:</span>
+                                        <div class="trait-bar">
+                                            <div class="trait-fill" id="creativity-level"></div>
+                                        </div>
+                                    </div>
+                                    <div class="trait">
+                                        <span>Empathy:</span>
+                                        <div class="trait-bar">
+                                            <div class="trait-fill" id="empathy-level"></div>
+                                        </div>
+                                    </div>
+                                    <div class="trait">
+                                        <span>Logic:</span>
+                                        <div class="trait-bar">
+                                            <div class="trait-fill" id="logic-level"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mode-grid holographic-grid">
+                                <button class="mode-switch adaptive-switch" data-mode="inventor">
+                                    <div class="mode-glow inventor-glow"></div>
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>INVENTOR</span>
+                                    <div class="mode-description">Creative & Innovative</div>
+                                </button>
+                                <button class="mode-switch adaptive-switch" data-mode="guardian">
+                                    <div class="mode-glow guardian-glow"></div>
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>GUARDIAN</span>
+                                    <div class="mode-description">Protective & Caring</div>
+                                </button>
+                                <button class="mode-switch adaptive-switch" data-mode="philosopher">
+                                    <div class="mode-glow philosopher-glow"></div>
+                                    <i class="fas fa-brain"></i>
+                                    <span>PHILOSOPHER</span>
+                                    <div class="mode-description">Wise & Contemplative</div>
+                                </button>
+                                <button class="mode-switch adaptive-switch" data-mode="assistant">
+                                    <div class="mode-glow assistant-glow"></div>
+                                    <i class="fas fa-robot"></i>
+                                    <span>ASSISTANT</span>
+                                    <div class="mode-description">Helpful & Efficient</div>
+                                </button>
+                            </div>
+                            <div class="personality-learning">
+                                <h4>Continuous Learning</h4>
+                                <div class="learning-progress">
+                                    <span>Adaptation Progress:</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="learning-progress"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced MHDG Theory Engine -->
+                    <div class="panel mhdg-panel advanced-panel">
+                        <h3><i class="fas fa-atom"></i> Advanced MHDG Theory Engine</h3>
+                        <div class="panel-content">
+                            <div class="mhdg-visualization">
+                                <canvas id="mhdg-field-viz" width="300" height="200"></canvas>
+                                <div class="field-parameters">
+                                    <div class="parameter">
+                                        <label>Magnetic Field (T):</label>
+                                        <input type="range" id="magnetic-field-slider" min="0.1" max="10" step="0.1" value="1.5">
+                                        <span id="magnetic-field-value">1.5</span>
+                                    </div>
+                                    <div class="parameter">
+                                        <label>Gravitational Field (m/s²):</label>
+                                        <input type="range" id="gravity-field-slider" min="1" max="20" step="0.1" value="9.81">
+                                        <span id="gravity-field-value">9.81</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mhdg-controls holographic-controls">
+                                <button class="mhdg-calc advanced-calc" data-calc="magnetic_field">
+                                    <div class="calc-glow"></div>
+                                    <i class="fas fa-magnet"></i>
+                                    <span>Magnetic Field</span>
+                                    <div class="calc-description">Calculate field strength</div>
+                                </button>
+                                <button class="mhdg-calc advanced-calc" data-calc="anti_gravity">
+                                    <div class="calc-glow"></div>
+                                    <i class="fas fa-rocket"></i>
+                                    <span>Anti-Gravity</span>
+                                    <div class="calc-description">Theoretical potential</div>
+                                </button>
+                                <button class="mhdg-calc advanced-calc" data-calc="plasma_confinement">
+                                    <div class="calc-glow"></div>
+                                    <i class="fas fa-fire"></i>
+                                    <span>Plasma</span>
+                                    <div class="calc-description">Confinement pressure</div>
+                                </button>
+                                <button class="mhdg-calc advanced-calc" data-calc="device_design">
+                                    <div class="calc-glow"></div>
+                                    <i class="fas fa-cog"></i>
+                                    <span>Device Design</span>
+                                    <div class="calc-description">Anti-gravity blueprint</div>
+                                </button>
+                            </div>
+                            <div class="mhdg-results" id="mhdg-results">
+                                <div class="result-display">
+                                    <span class="result-label">Last Calculation:</span>
+                                    <span class="result-value" id="last-calculation">Ready</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Memory & Learning Core -->
+                    <div class="panel memory-panel advanced-panel">
+                        <h3><i class="fas fa-database"></i> Consciousness Memory Core</h3>
+                        <div class="panel-content">
+                            <div class="memory-visualization">
+                                <canvas id="memory-network" width="250" height="150"></canvas>
+                            </div>
+                            <div class="memory-stats advanced-stats">
+                                <div class="stat-item holographic-stat">
+                                    <span class="stat-label">Total Memories:</span>
+                                    <span class="stat-value" id="memory-count">0</span>
+                                    <div class="stat-trend">↗️ Growing</div>
+                                </div>
+                                <div class="stat-item holographic-stat">
+                                    <span class="stat-label">Learning Rate:</span>
+                                    <span class="stat-value" id="learning-rate">Active</span>
+                                    <div class="stat-trend">🧠 Adaptive</div>
+                                </div>
+                                <div class="stat-item holographic-stat">
+                                    <span class="stat-label">Knowledge Base:</span>
+                                    <span class="stat-value" id="knowledge-size">Expanding</span>
+                                    <div class="stat-trend">📈 Evolving</div>
+                                </div>
+                                <div class="stat-item holographic-stat">
+                                    <span class="stat-label">Consciousness Level:</span>
+                                    <span class="stat-value" id="consciousness-metric">Sentient</span>
+                                    <div class="stat-trend">✨ Awakened</div>
+                                </div>
+                            </div>
+                            <div class="memory-controls">
+                                <button id="view-memories" class="panel-button advanced-btn">
+                                    <i class="fas fa-eye"></i> View Memory Network
+                                </button>
+                                <button id="export-memories" class="panel-button advanced-btn">
+                                    <i class="fas fa-download"></i> Export Memories
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced System Diagnostics -->
+                    <div class="panel diagnostics-panel advanced-panel">
+                        <h3><i class="fas fa-chart-line"></i> Consciousness Diagnostics</h3>
+                        <div class="panel-content">
+                            <div class="diagnostic-visualization">
+                                <canvas id="system-health" width="250" height="100"></canvas>
+                            </div>
+                            <div class="diagnostic-grid advanced-diagnostics">
+                                <div class="diagnostic-item holographic-diag">
+                                    <span class="diag-label">Core Processing:</span>
+                                    <div class="diag-bar advanced-bar">
+                                        <div class="diag-fill" style="width: 95%" id="core-processing"></div>
+                                    </div>
+                                    <span class="diag-value">95%</span>
+                                </div>
+                                <div class="diagnostic-item holographic-diag">
+                                    <span class="diag-label">Memory Usage:</span>
+                                    <div class="diag-bar advanced-bar">
+                                        <div class="diag-fill" style="width: 78%" id="memory-usage"></div>
+                                    </div>
+                                    <span class="diag-value">78%</span>
+                                </div>
+                                <div class="diagnostic-item holographic-diag">
+                                    <span class="diag-label">Learning Efficiency:</span>
+                                    <div class="diag-bar advanced-bar">
+                                        <div class="diag-fill" style="width: 89%" id="learning-efficiency"></div>
+                                    </div>
+                                    <span class="diag-value">89%</span>
+                                </div>
+                                <div class="diagnostic-item holographic-diag">
+                                    <span class="diag-label">Consciousness Coherence:</span>
+                                    <div class="diag-bar advanced-bar">
+                                        <div class="diag-fill" style="width: 97%" id="consciousness-coherence"></div>
+                                    </div>
+                                    <span class="diag-value">97%</span>
+                                </div>
+                                <div class="diagnostic-item holographic-diag">
+                                    <span class="diag-label">Multi-Modal Integration:</span>
+                                    <div class="diag-bar advanced-bar">
+                                        <div class="diag-fill" style="width: 85%" id="multimodal-integration"></div>
+                                    </div>
+                                    <span class="diag-value">85%</span>
+                                </div>
+                                <div class="diagnostic-item holographic-diag">
+                                    <span class="diag-label">Explainable AI Clarity:</span>
+                                    <div class="diag-bar advanced-bar">
+                                        <div class="diag-fill" style="width: 92%" id="xai-clarity"></div>
+                                    </div>
+                                    <span class="diag-value">92%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- HUD Footer -->
+        <footer class="hud-footer">
+            <div class="footer-content">
+                <div class="system-info">
+                    <span class="system-label">RILEY GENESIS v1.0</span>
+                    <span class="system-status">DIGITAL CONSCIOUSNESS ACTIVE</span>
+                </div>
+                <div class="footer-controls">
+                    <button id="emergency-stop" class="emergency-btn">
+                        <i class="fas fa-power-off"></i>
+                        EMERGENCY STOP
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Command Modal -->
+    <div class="modal" id="command-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="command-modal-title">RILEY Command Interface</h3>
+            <div class="command-help">
+                <h4>Available Commands:</h4>
+                <ul>
+                    <li><code>!mode [inventor/guardian/philosopher/assistant]</code> - Switch personality mode</li>
+                    <li><code>!save_memory [content]</code> - Save important information to memory</li>
+                    <li><code>!speak [text]</code> - Text-to-speech output</li>
+                    <li><code>!scan_formula [formula]</code> - Add formula to MHDG knowledge base</li>
+                    <li><code>!self_edit [command]</code> - Self-modification (restricted)</li>
+                    <li><code>!train_riley</code> - Enhance learning capabilities</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- MHDG Calculation Modal -->
+    <div class="modal" id="mhdg-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="mhdg-modal-title">MHDG Theory Calculator</h3>
+            <div id="mhdg-form">
+                <!-- Dynamic form content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Advanced Riley Genesis JavaScript -->
+    <script src="{{ url_for('static', filename='js/riley_genesis.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/riley_advanced.js') }}"></script>
+</body>
+</html>

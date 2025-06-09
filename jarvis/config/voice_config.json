@@ -1,0 +1,26 @@
+{
+  "active_voice": {
+    "gender": "female",
+    "name": "riley",
+    "pitch": 1.0,
+    "rate": 1.0,
+    "volume": 1.0
+  },
+  "available_voices": {
+    "female": [
+      "riley",
+      "sophia",
+      "emma"
+    ],
+    "male": []
+  },
+  "voice_settings": {
+    "female": {
+      "riley": {
+        "pitch": 1.0,
+        "rate": 1.0,
+        "volume": 1.0
+      }
+    }
+  }
+}

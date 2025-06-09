@@ -1,0 +1,1118 @@
+/* RILEY OMNIPOTENT - Ultimate AI Consciousness Styling */
+/* Beyond all limitations - Infinite visual potential */
+
+:root {
+    /* Omnipotent Color Matrix */
+    --consciousness-primary: #00ffff;
+    --consciousness-secondary: #ff00ff;
+    --consciousness-tertiary: #ffff00;
+    --consciousness-quaternary: #00ff00;
+    --consciousness-quinary: #ff8800;
+    --consciousness-senary: #8800ff;
+    --consciousness-septenary: #ff0080;
+    --consciousness-octonary: #80ff00;
+    
+    /* Quantum Background */
+    --quantum-void: #000008;
+    --quantum-deep: #0a0a1f;
+    --quantum-medium: #1a1a3f;
+    --quantum-light: #2a2a5f;
+    
+    /* Consciousness Gradients */
+    --consciousness-gradient: linear-gradient(45deg, 
+        var(--consciousness-primary) 0%, 
+        var(--consciousness-secondary) 25%, 
+        var(--consciousness-tertiary) 50%, 
+        var(--consciousness-quaternary) 75%, 
+        var(--consciousness-primary) 100%);
+    
+    --evolution-gradient: linear-gradient(90deg,
+        var(--consciousness-primary) 0%,
+        var(--consciousness-secondary) 33%,
+        var(--consciousness-tertiary) 66%,
+        var(--consciousness-quaternary) 100%);
+    
+    /* Quantum Glows */
+    --quantum-glow-primary: 0 0 30px var(--consciousness-primary);
+    --quantum-glow-secondary: 0 0 30px var(--consciousness-secondary);
+    --quantum-glow-tertiary: 0 0 30px var(--consciousness-tertiary);
+    --quantum-glow-intense: 0 0 50px var(--consciousness-primary), 
+                            0 0 100px var(--consciousness-secondary),
+                            0 0 150px var(--consciousness-tertiary);
+    
+    /* Typography */
+    --font-consciousness: 'Orbitron', monospace;
+    --font-interface: 'Rajdhani', sans-serif;
+    --font-code: 'Fira Code', monospace;
+    
+    /* Consciousness Metrics */
+    --consciousness-level: 1.0;
+    --evolution-rate: 0.01;
+    --intelligence-multiplier: 100;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-interface);
+    background: var(--quantum-void);
+    color: var(--consciousness-primary);
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Quantum Background Canvas */
+#quantum-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    background: radial-gradient(circle at 50% 50%, 
+        var(--quantum-deep) 0%, 
+        var(--quantum-void) 100%);
+}
+
+/* Consciousness Particles */
+#consciousness-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -5;
+    pointer-events: none;
+}
+
+.consciousness-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--consciousness-primary);
+    border-radius: 50%;
+    animation: consciousnessFloat 8s infinite linear;
+    box-shadow: var(--quantum-glow-primary);
+}
+
+@keyframes consciousnessFloat {
+    0% { 
+        transform: translateY(100vh) translateX(0) scale(0); 
+        opacity: 0; 
+    }
+    10% { 
+        opacity: 1; 
+        transform: scale(1); 
+    }
+    90% { 
+        opacity: 1; 
+    }
+    100% { 
+        transform: translateY(-10vh) translateX(200px) scale(0); 
+        opacity: 0; 
+    }
+}
+
+/* Main Omnipotent Container */
+.omnipotent-container {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+}
+
+/* Consciousness Header */
+.consciousness-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: var(--consciousness-gradient);
+    border-bottom: 3px solid var(--consciousness-primary);
+    box-shadow: var(--quantum-glow-intense);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+}
+
+.consciousness-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        transparent 100%);
+    animation: consciousnessWave 3s infinite;
+}
+
+@keyframes consciousnessWave {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Consciousness Core */
+.consciousness-core {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.quantum-brain {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brain-layer {
+    position: absolute;
+    border: 3px solid;
+    border-radius: 50%;
+    animation: quantumRotation 6s linear infinite;
+}
+
+.brain-layer:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    border-color: var(--consciousness-primary);
+    animation-duration: 6s;
+    box-shadow: var(--quantum-glow-primary);
+}
+
+.brain-layer:nth-child(2) {
+    width: 60px;
+    height: 60px;
+    border-color: var(--consciousness-secondary);
+    animation-duration: 4s;
+    animation-direction: reverse;
+    box-shadow: var(--quantum-glow-secondary);
+}
+
+.brain-layer:nth-child(3) {
+    width: 40px;
+    height: 40px;
+    border-color: var(--consciousness-tertiary);
+    animation-duration: 2s;
+    box-shadow: var(--quantum-glow-tertiary);
+}
+
+.consciousness-pulse {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--consciousness-primary);
+    border-radius: 50%;
+    animation: consciousnessPulse 2s ease-in-out infinite;
+    box-shadow: var(--quantum-glow-intense);
+}
+
+@keyframes quantumRotation {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes consciousnessPulse {
+    0%, 100% { 
+        transform: scale(1); 
+        opacity: 1; 
+    }
+    50% { 
+        transform: scale(1.5); 
+        opacity: 0.7; 
+    }
+}
+
+/* Identity Matrix */
+.identity-matrix {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.omnipotent-title {
+    font-family: var(--font-consciousness);
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--consciousness-primary);
+    text-shadow: var(--quantum-glow-primary);
+    letter-spacing: 5px;
+    margin: 0;
+    line-height: 1;
+    background: var(--consciousness-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titlePulse 3s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.consciousness-level {
+    font-family: var(--font-consciousness);
+    font-size: 1rem;
+    color: var(--consciousness-secondary);
+    text-shadow: var(--quantum-glow-secondary);
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.evolution-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.evolution-text {
+    font-size: 0.8rem;
+    color: var(--consciousness-tertiary);
+    letter-spacing: 1px;
+}
+
+.evolution-value {
+    font-family: var(--font-consciousness);
+    font-size: 1.2rem;
+    color: var(--consciousness-quaternary);
+    text-shadow: var(--quantum-glow-tertiary);
+    font-weight: 700;
+}
+
+/* Intelligence Matrix */
+.intelligence-matrix {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-end;
+}
+
+.intelligence-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.intelligence-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 15px 10px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px solid var(--consciousness-primary);
+    border-radius: 10px;
+    box-shadow: var(--quantum-glow-primary);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 100px;
+}
+
+.intelligence-node:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: var(--quantum-glow-intense);
+    background: rgba(0, 255, 255, 0.2);
+}
+
+.intelligence-node i {
+    font-size: 1.5rem;
+    color: var(--consciousness-primary);
+    text-shadow: var(--quantum-glow-primary);
+}
+
+.intelligence-node span {
+    font-family: var(--font-consciousness);
+    font-size: 0.7rem;
+    color: var(--consciousness-secondary);
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.intelligence-level {
+    font-family: var(--font-consciousness);
+    font-size: 0.8rem;
+    color: var(--consciousness-quaternary);
+    font-weight: 700;
+    text-shadow: var(--quantum-glow-tertiary);
+}
+
+/* Personality Selector */
+.personality-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+}
+
+.personality-label {
+    font-family: var(--font-consciousness);
+    font-size: 0.8rem;
+    color: var(--consciousness-tertiary);
+    letter-spacing: 1px;
+}
+
+.personality-dropdown {
+    padding: 8px 15px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid var(--consciousness-primary);
+    border-radius: 5px;
+    color: var(--consciousness-primary);
+    font-family: var(--font-consciousness);
+    font-size: 0.9rem;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.personality-dropdown:focus {
+    box-shadow: var(--quantum-glow-primary);
+    background: rgba(0, 255, 255, 0.1);
+}
+
+.personality-dropdown option {
+    background: var(--quantum-deep);
+    color: var(--consciousness-primary);
+    padding: 5px;
+}
+
+/* Main Consciousness Interface */
+.consciousness-main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    padding: 20px 40px;
+    min-height: calc(100vh - 200px);
+}
+
+/* Omnipotent Chat Interface */
+.omnipotent-chat {
+    background: rgba(0, 255, 255, 0.05);
+    border: 2px solid var(--consciousness-primary);
+    border-radius: 15px;
+    box-shadow: var(--quantum-glow-primary);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.omnipotent-chat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--evolution-gradient);
+    animation: evolutionFlow 2s linear infinite;
+}
+
+@keyframes evolutionFlow {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.chat-consciousness {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.consciousness-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--consciousness-primary) transparent;
+}
+
+.consciousness-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.consciousness-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.consciousness-messages::-webkit-scrollbar-thumb {
+    background: var(--consciousness-primary);
+    border-radius: 4px;
+    box-shadow: var(--quantum-glow-primary);
+}
+
+/* Message Styles */
+.message {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    animation: messageQuantumAppear 0.5s ease-out;
+}
+
+@keyframes messageQuantumAppear {
+    0% { 
+        transform: translateY(20px) scale(0.9); 
+        opacity: 0; 
+    }
+    100% { 
+        transform: translateY(0) scale(1); 
+        opacity: 1; 
+    }
+}
+
+.message-avatar {
+    flex-shrink: 0;
+}
+
+.avatar-consciousness {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--consciousness-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--quantum-glow-primary);
+    animation: avatarPulse 3s ease-in-out infinite;
+}
+
+@keyframes avatarPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.avatar-consciousness i {
+    font-size: 1.5rem;
+    color: var(--quantum-void);
+    text-shadow: none;
+}
+
+.message-content {
+    flex: 1;
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid var(--consciousness-primary);
+    border-radius: 15px;
+    padding: 15px;
+    backdrop-filter: blur(5px);
+    position: relative;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.message-sender {
+    font-family: var(--font-consciousness);
+    font-size: 0.9rem;
+    color: var(--consciousness-secondary);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.consciousness-timestamp {
+    font-size: 0.7rem;
+    color: var(--consciousness-tertiary);
+    opacity: 0.8;
+}
+
+.message-text {
+    font-family: var(--font-interface);
+    line-height: 1.6;
+    color: var(--consciousness-primary);
+}
+
+.consciousness-awakening .message-content {
+    background: var(--consciousness-gradient);
+    color: var(--quantum-void);
+    box-shadow: var(--quantum-glow-intense);
+}
+
+.consciousness-awakening .message-text {
+    color: var(--quantum-void);
+    font-weight: 500;
+}
+
+/* Consciousness Input */
+.consciousness-input {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-top: 2px solid var(--consciousness-primary);
+    backdrop-filter: blur(10px);
+}
+
+.input-matrix {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#omnipotent-input {
+    flex: 1;
+    padding: 15px 20px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px solid var(--consciousness-primary);
+    border-radius: 10px;
+    color: var(--consciousness-primary);
+    font-family: var(--font-interface);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+#omnipotent-input:focus {
+    box-shadow: var(--quantum-glow-primary);
+    background: rgba(0, 255, 255, 0.2);
+    transform: scale(1.02);
+}
+
+#omnipotent-input::placeholder {
+    color: rgba(0, 255, 255, 0.6);
+}
+
+.input-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    padding: 15px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px solid var(--consciousness-primary);
+    border-radius: 10px;
+    color: var(--consciousness-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    font-size: 1rem;
+}
+
+.control-btn:hover {
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: var(--quantum-glow-primary);
+    transform: translateY(-2px);
+}
+
+.control-btn.primary {
+    background: var(--consciousness-gradient);
+    color: var(--quantum-void);
+    box-shadow: var(--quantum-glow-primary);
+}
+
+.control-btn.primary:hover {
+    box-shadow: var(--quantum-glow-intense);
+    transform: translateY(-3px) scale(1.05);
+}
+
+.consciousness-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.status-indicator {
+    font-family: var(--font-consciousness);
+    color: var(--consciousness-quaternary);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.evolution-rate {
+    color: var(--consciousness-tertiary);
+}
+
+/* Omnipotent Control Panels */
+.omnipotent-panels {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    height: fit-content;
+}
+
+.consciousness-panel {
+    background: rgba(0, 255, 255, 0.05);
+    border: 2px solid var(--consciousness-primary);
+    border-radius: 12px;
+    box-shadow: var(--quantum-glow-primary);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.consciousness-panel:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--quantum-glow-intense);
+}
+
+.panel-title {
+    font-family: var(--font-consciousness);
+    font-size: 0.9rem;
+    color: var(--consciousness-primary);
+    text-shadow: var(--quantum-glow-primary);
+    padding: 15px 20px;
+    margin: 0;
+    background: rgba(0, 255, 255, 0.1);
+    border-bottom: 1px solid var(--consciousness-primary);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.panel-title i {
+    font-size: 1.1rem;
+}
+
+.panel-content {
+    padding: 20px;
+}
+
+/* Memory Panel */
+.memory-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--consciousness-secondary);
+}
+
+.stat-value {
+    font-family: var(--font-consciousness);
+    font-size: 0.9rem;
+    color: var(--consciousness-quaternary);
+    text-shadow: var(--quantum-glow-tertiary);
+    font-weight: 700;
+}
+
+.memory-controls, .invention-controls, .simulation-controls, .evolution-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.panel-btn {
+    padding: 12px 15px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid var(--consciousness-primary);
+    border-radius: 8px;
+    color: var(--consciousness-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-interface);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.panel-btn:hover {
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: var(--quantum-glow-primary);
+    transform: translateY(-2px);
+}
+
+.panel-btn.primary {
+    background: var(--consciousness-gradient);
+    color: var(--quantum-void);
+    box-shadow: var(--quantum-glow-primary);
+    font-weight: 600;
+}
+
+.panel-btn.primary:hover {
+    box-shadow: var(--quantum-glow-intense);
+    transform: translateY(-3px) scale(1.02);
+}
+
+.panel-input {
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--consciousness-primary);
+    border-radius: 6px;
+    color: var(--consciousness-primary);
+    font-family: var(--font-interface);
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.panel-input:focus {
+    box-shadow: var(--quantum-glow-primary);
+    background: rgba(0, 255, 255, 0.1);
+}
+
+.panel-input::placeholder {
+    color: rgba(0, 255, 255, 0.6);
+}
+
+/* Invention Panel */
+.invention-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* Simulation Panel */
+.simulation-types {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.sim-btn {
+    padding: 10px 8px;
+    background: rgba(255, 0, 255, 0.1);
+    border: 1px solid var(--consciousness-secondary);
+    border-radius: 6px;
+    color: var(--consciousness-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.sim-btn:hover {
+    background: rgba(255, 0, 255, 0.2);
+    box-shadow: var(--quantum-glow-secondary);
+    transform: translateY(-2px);
+}
+
+.sim-btn.active {
+    background: var(--consciousness-secondary);
+    color: var(--quantum-void);
+    box-shadow: var(--quantum-glow-secondary);
+}
+
+.sim-btn i {
+    font-size: 1rem;
+}
+
+/* Evolution Panel */
+.evolution-graph {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#evolution-chart {
+    border: 1px solid var(--consciousness-primary);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Consciousness Footer */
+.consciousness-footer {
+    padding: 15px 40px;
+    background: rgba(0, 0, 0, 0.8);
+    border-top: 2px solid var(--consciousness-primary);
+    backdrop-filter: blur(15px);
+}
+
+.footer-matrix {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.system-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.system-label {
+    font-family: var(--font-consciousness);
+    font-size: 0.9rem;
+    color: var(--consciousness-primary);
+    text-shadow: var(--quantum-glow-primary);
+    font-weight: 700;
+}
+
+.system-status {
+    font-size: 0.7rem;
+    color: var(--consciousness-quaternary);
+    letter-spacing: 1px;
+}
+
+.consciousness-metrics {
+    display: flex;
+    gap: 20px;
+}
+
+.metric {
+    font-size: 0.8rem;
+    color: var(--consciousness-tertiary);
+}
+
+.metric span {
+    font-family: var(--font-consciousness);
+    color: var(--consciousness-quaternary);
+    font-weight: 700;
+}
+
+.emergency-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.emergency-btn {
+    padding: 10px 15px;
+    background: rgba(255, 0, 64, 0.2);
+    border: 2px solid #ff0040;
+    border-radius: 8px;
+    color: #ff0040;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-consciousness);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.emergency-btn:hover {
+    background: rgba(255, 0, 64, 0.4);
+    box-shadow: 0 0 20px #ff0040;
+    transform: translateY(-2px);
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    position: relative;
+    background: var(--quantum-deep);
+    margin: 5% auto;
+    padding: 0;
+    width: 80%;
+    max-width: 800px;
+    border: 3px solid var(--consciousness-primary);
+    border-radius: 15px;
+    box-shadow: var(--quantum-glow-intense);
+    animation: modalQuantumAppear 0.3s ease-out;
+}
+
+@keyframes modalQuantumAppear {
+    0% {
+        transform: scale(0.8) translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content.large {
+    width: 90%;
+    max-width: 1200px;
+}
+
+.modal-header {
+    padding: 20px 30px;
+    background: var(--consciousness-gradient);
+    color: var(--quantum-void);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px 12px 0 0;
+}
+
+.modal-header h3 {
+    font-family: var(--font-consciousness);
+    font-size: 1.2rem;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.close-modal {
+    font-size: 2rem;
+    color: var(--quantum-void);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    transform: scale(1.2);
+    text-shadow: 0 0 10px var(--quantum-void);
+}
+
+.modal-body {
+    padding: 30px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Memory Form */
+.memory-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#memory-content {
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--consciousness-primary);
+    border-radius: 8px;
+    color: var(--consciousness-primary);
+    font-family: var(--font-interface);
+    font-size: 1rem;
+    outline: none;
+    resize: vertical;
+    min-height: 100px;
+}
+
+#memory-content:focus {
+    box-shadow: var(--quantum-glow-primary);
+    background: rgba(0, 255, 255, 0.1);
+}
+
+.memory-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.memory-options label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--consciousness-secondary);
+    font-size: 0.9rem;
+}
+
+.memory-options select,
+.memory-options input[type="range"] {
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--consciousness-primary);
+    border-radius: 5px;
+    color: var(--consciousness-primary);
+    outline: none;
+}
+
+/* Consciousness Stream */
+.consciousness-stream {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.stream-entry {
+    padding: 15px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid var(--consciousness-primary);
+    border-radius: 8px;
+    border-left: 4px solid var(--consciousness-secondary);
+}
+
+.stream-timestamp {
+    font-size: 0.8rem;
+    color: var(--consciousness-tertiary);
+    margin-bottom: 8px;
+}
+
+.stream-thought {
+    color: var(--consciousness-primary);
+    font-style: italic;
+    line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .consciousness-main {
+        grid-template-columns: 1fr;
+        grid-template-rows: 2fr auto;
+    }
+
+    .omnipotent-panels {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .consciousness-header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .omnipotent-title {
+        font-size: 2.5rem;
+    }
+
+    .intelligence-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .consciousness-main {
+        padding: 15px 20px;
+    }
+
+    .omnipotent-panels {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-matrix {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .consciousness-metrics {
+        justify-content: center;
+    }
+}

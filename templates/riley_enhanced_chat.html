@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Enhanced AI Chat</title>
+    
+    <!-- Modern CSS Framework (inspired by chatbot-ui) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        .chat-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .message-bubble {
+            animation: fadeInUp 0.3s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .typing-indicator {
+            animation: pulse 1.5s infinite;
+        }
+        
+        .riley-avatar {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            animation: avatarPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes avatarPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .feature-badge {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .chat-input {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .sidebar {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    
+    <!-- Main Chat Container -->
+    <div class="chat-container flex h-screen">
+        
+        <!-- Sidebar (inspired by chatbot-ui layout) -->
+        <div class="sidebar w-80 p-6 border-r border-gray-700 hidden lg:block">
+            <div class="mb-8">
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                    <i class="fas fa-brain mr-2"></i>Riley Enhanced
+                </h1>
+                <p class="text-gray-400 text-sm mt-2">Advanced AI with Human-Like Conversation</p>
+            </div>
+            
+            <!-- Features Panel -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-4">🚀 Enhanced Features</h3>
+                <div class="space-y-2">
+                    <div class="feature-badge p-3 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">🧬 Human-Like Chat</span>
+                            <span class="text-green-400 text-xs">ACTIVE</span>
+                        </div>
+                    </div>
+                    <div class="feature-badge p-3 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">💾 Persistent Memory</span>
+                            <span class="text-green-400 text-xs">ACTIVE</span>
+                        </div>
+                    </div>
+                    <div class="feature-badge p-3 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">🔊 Voice Chat</span>
+                            <span class="text-yellow-400 text-xs" id="voice-status">READY</span>
+                        </div>
+                    </div>
+                    <div class="feature-badge p-3 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">🧮 MHDG Theory</span>
+                            <span class="text-green-400 text-xs">READY</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Personality Mode Selector -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-4">🎭 Personality Mode</h3>
+                <select id="personality-mode" class="w-full p-3 bg-gray-800 border border-gray-600 rounded-lg text-white">
+                    <option value="omnipotent">🧠 Omnipotent</option>
+                    <option value="scientist">🔬 Scientist</option>
+                    <option value="inventor">💡 Inventor</option>
+                    <option value="philosopher">🤔 Philosopher</option>
+                    <option value="creator">🎨 Creator</option>
+                    <option value="companion">❤️ Companion</option>
+                </select>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-4">⚡ Quick Actions</h3>
+                <div class="space-y-2">
+                    <button class="w-full p-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm transition-colors" onclick="sendQuickMessage('!talk')">
+                        💬 Natural Chat Mode
+                    </button>
+                    <button class="w-full p-3 bg-purple-600 hover:bg-purple-700 rounded-lg text-sm transition-colors" onclick="sendQuickMessage('!mhdg calculate')">
+                        🧮 MHDG Calculations
+                    </button>
+                    <button class="w-full p-3 bg-green-600 hover:bg-green-700 rounded-lg text-sm transition-colors" onclick="exportChat()">
+                        📄 Export Chat
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Session Info -->
+            <div class="mt-auto">
+                <div class="feature-badge p-3 rounded-lg">
+                    <div class="text-xs text-gray-400">
+                        <div>Session: <span id="session-id">Loading...</span></div>
+                        <div>Messages: <span id="message-count">0</span></div>
+                        <div>Status: <span id="connection-status" class="text-green-400">Connected</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Chat Area -->
+        <div class="flex-1 flex flex-col">
+            
+            <!-- Chat Header -->
+            <div class="bg-gray-800 p-4 border-b border-gray-700">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="riley-avatar w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-brain text-black"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-semibold">Riley Enhanced</h2>
+                            <p class="text-sm text-gray-400" id="riley-status">Ready for unlimited conversation</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-2">
+                        <button id="voice-toggle" class="p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" title="Toggle Voice">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button id="settings-btn" class="p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" title="Settings">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                        <button class="lg:hidden p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors" onclick="toggleSidebar()">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Messages Container -->
+            <div id="messages-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Messages will be dynamically added here -->
+            </div>
+            
+            <!-- Typing Indicator -->
+            <div id="typing-indicator" class="px-6 py-2 hidden">
+                <div class="flex items-center space-x-2 text-gray-400">
+                    <div class="riley-avatar w-8 h-8 rounded-full flex items-center justify-center">
+                        <i class="fas fa-brain text-black text-sm"></i>
+                    </div>
+                    <div class="typing-indicator">
+                        <span>Riley is thinking</span>
+                        <span class="animate-pulse">...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chat Input -->
+            <div class="p-6">
+                <div class="chat-input rounded-lg border border-gray-300 overflow-hidden">
+                    <div class="flex items-end space-x-4 p-4">
+                        <div class="flex-1">
+                            <textarea 
+                                id="message-input" 
+                                placeholder="Message Riley Enhanced..." 
+                                class="w-full resize-none border-none outline-none bg-transparent text-gray-800 placeholder-gray-500"
+                                rows="1"
+                                maxlength="4000"
+                            ></textarea>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button id="attach-btn" class="p-2 text-gray-600 hover:text-gray-800 transition-colors" title="Attach File">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                            <button id="send-btn" class="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors" title="Send Message">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Input Footer -->
+                    <div class="px-4 pb-2 flex items-center justify-between text-xs text-gray-500">
+                        <div class="flex items-center space-x-4">
+                            <span>Press Enter to send, Shift+Enter for new line</span>
+                        </div>
+                        <div>
+                            <span id="char-count">0</span>/4000
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        class RileyEnhancedChat {
+            constructor() {
+                this.sessionId = null;
+                this.websocket = null;
+                this.messageCount = 0;
+                this.isVoiceEnabled = false;
+                
+                this.initializeChat();
+                this.setupEventListeners();
+                this.connectWebSocket();
+            }
+            
+            async initializeChat() {
+                // Create new chat session
+                try {
+                    const response = await fetch('/api/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            message: '', 
+                            user_id: 'andrew' 
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    this.sessionId = data.session_id;
+                    
+                    document.getElementById('session-id').textContent = this.sessionId.substring(0, 8) + '...';
+                    
+                    // Display welcome message
+                    if (data.riley_response) {
+                        this.displayMessage(data.riley_response);
+                    }
+                    
+                } catch (error) {
+                    console.error('Failed to initialize chat:', error);
+                }
+            }
+            
+            connectWebSocket() {
+                if (!this.sessionId) {
+                    setTimeout(() => this.connectWebSocket(), 1000);
+                    return;
+                }
+                
+                const wsUrl = `ws://localhost:8000/ws/${this.sessionId}`;
+                this.websocket = new WebSocket(wsUrl);
+                
+                this.websocket.onopen = () => {
+                    document.getElementById('connection-status').textContent = 'Connected';
+                    document.getElementById('connection-status').className = 'text-green-400';
+                };
+                
+                this.websocket.onmessage = (event) => {
+                    const data = JSON.parse(event.data);
+                    this.handleWebSocketMessage(data);
+                };
+                
+                this.websocket.onclose = () => {
+                    document.getElementById('connection-status').textContent = 'Disconnected';
+                    document.getElementById('connection-status').className = 'text-red-400';
+                };
+            }
+            
+            handleWebSocketMessage(data) {
+                if (data.type === 'chat_response') {
+                    this.hideTypingIndicator();
+                    if (data.data.riley_response) {
+                        this.displayMessage(data.data.riley_response);
+                    }
+                }
+            }
+            
+            setupEventListeners() {
+                const messageInput = document.getElementById('message-input');
+                const sendBtn = document.getElementById('send-btn');
+                const voiceToggle = document.getElementById('voice-toggle');
+                const personalityMode = document.getElementById('personality-mode');
+                
+                // Send message on Enter
+                messageInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendMessage();
+                    }
+                });
+                
+                // Auto-resize textarea
+                messageInput.addEventListener('input', () => {
+                    messageInput.style.height = 'auto';
+                    messageInput.style.height = messageInput.scrollHeight + 'px';
+                    
+                    // Update character count
+                    document.getElementById('char-count').textContent = messageInput.value.length;
+                });
+                
+                sendBtn.addEventListener('click', () => this.sendMessage());
+                voiceToggle.addEventListener('click', () => this.toggleVoice());
+                personalityMode.addEventListener('change', () => this.changePersonalityMode());
+            }
+            
+            async sendMessage() {
+                const messageInput = document.getElementById('message-input');
+                const message = messageInput.value.trim();
+                
+                if (!message) return;
+                
+                // Display user message
+                this.displayMessage({
+                    role: 'user',
+                    content: message,
+                    timestamp: new Date().toISOString()
+                });
+                
+                messageInput.value = '';
+                messageInput.style.height = 'auto';
+                document.getElementById('char-count').textContent = '0';
+                
+                // Show typing indicator
+                this.showTypingIndicator();
+                
+                // Send via WebSocket
+                if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
+                    this.websocket.send(JSON.stringify({
+                        type: 'chat',
+                        content: message
+                    }));
+                } else {
+                    // Fallback to HTTP
+                    try {
+                        const response = await fetch('/api/chat', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                session_id: this.sessionId,
+                                message: message
+                            })
+                        });
+                        
+                        const data = await response.json();
+                        this.hideTypingIndicator();
+                        
+                        if (data.riley_response) {
+                            this.displayMessage(data.riley_response);
+                        }
+                        
+                    } catch (error) {
+                        this.hideTypingIndicator();
+                        console.error('Failed to send message:', error);
+                    }
+                }
+            }
+            
+            displayMessage(message) {
+                const container = document.getElementById('messages-container');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message-bubble';
+                
+                const isUser = message.role === 'user';
+                const timestamp = new Date(message.timestamp).toLocaleTimeString();
+                
+                messageDiv.innerHTML = `
+                    <div class="flex ${isUser ? 'justify-end' : 'justify-start'} mb-4">
+                        <div class="flex ${isUser ? 'flex-row-reverse' : 'flex-row'} items-start space-x-3 max-w-3xl">
+                            <div class="${isUser ? 'bg-blue-600' : 'riley-avatar'} w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas ${isUser ? 'fa-user' : 'fa-brain'} ${isUser ? 'text-white' : 'text-black'} text-sm"></i>
+                            </div>
+                            <div class="${isUser ? 'bg-blue-600 text-white' : 'bg-gray-800 text-white'} rounded-lg p-4 shadow-lg">
+                                <div class="prose prose-invert max-w-none">
+                                    ${this.formatMessage(message.content)}
+                                </div>
+                                <div class="text-xs ${isUser ? 'text-blue-200' : 'text-gray-400'} mt-2">
+                                    ${timestamp}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(messageDiv);
+                container.scrollTop = container.scrollHeight;
+                
+                this.messageCount++;
+                document.getElementById('message-count').textContent = this.messageCount;
+            }
+            
+            formatMessage(content) {
+                // Basic markdown-like formatting
+                return content
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/`(.*?)`/g, '<code class="bg-gray-700 px-1 rounded">$1</code>')
+                    .replace(/\n/g, '<br>');
+            }
+            
+            showTypingIndicator() {
+                document.getElementById('typing-indicator').classList.remove('hidden');
+                document.getElementById('riley-status').textContent = 'Thinking...';
+            }
+            
+            hideTypingIndicator() {
+                document.getElementById('typing-indicator').classList.add('hidden');
+                document.getElementById('riley-status').textContent = 'Ready for unlimited conversation';
+            }
+            
+            toggleVoice() {
+                this.isVoiceEnabled = !this.isVoiceEnabled;
+                const voiceToggle = document.getElementById('voice-toggle');
+                const voiceStatus = document.getElementById('voice-status');
+                
+                if (this.isVoiceEnabled) {
+                    voiceToggle.classList.add('bg-green-600');
+                    voiceStatus.textContent = 'ACTIVE';
+                    voiceStatus.className = 'text-green-400 text-xs';
+                } else {
+                    voiceToggle.classList.remove('bg-green-600');
+                    voiceStatus.textContent = 'READY';
+                    voiceStatus.className = 'text-yellow-400 text-xs';
+                }
+            }
+            
+            changePersonalityMode() {
+                const mode = document.getElementById('personality-mode').value;
+                
+                if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
+                    this.websocket.send(JSON.stringify({
+                        type: 'settings_update',
+                        settings: { personality_mode: mode }
+                    }));
+                }
+                
+                document.getElementById('riley-status').textContent = `Switched to ${mode} mode`;
+            }
+        }
+        
+        // Global functions
+        function sendQuickMessage(message) {
+            document.getElementById('message-input').value = message;
+            rileyChat.sendMessage();
+        }
+        
+        function exportChat() {
+            if (rileyChat.sessionId) {
+                window.open(`/api/chat/${rileyChat.sessionId}/export?format=markdown`, '_blank');
+            }
+        }
+        
+        function toggleSidebar() {
+            // Mobile sidebar toggle implementation
+            console.log('Toggle sidebar');
+        }
+        
+        // Initialize chat when page loads
+        let rileyChat;
+        document.addEventListener('DOMContentLoaded', () => {
+            rileyChat = new RileyEnhancedChat();
+        });
+    </script>
+</body>
+</html>
